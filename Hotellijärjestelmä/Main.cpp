@@ -17,7 +17,7 @@ int menu(int room[], int ROOMS, int PRICE);
 int main() {	//main initializes constants and room reservation array
 
 	int const PRICE = 100;
-	int const ROOMS = 2;
+	int const ROOMS = 20;
 
 	int room[ROOMS];
 
