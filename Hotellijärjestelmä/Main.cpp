@@ -2,10 +2,8 @@
 //Tekijä: Veeti "Hazel" Stolt
 
 #include<iostream>
-#include<iomanip>
 #include<string>
-#include<random>
-#include<vector>
+
 
 using namespace std;
 
