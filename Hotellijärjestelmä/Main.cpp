@@ -30,8 +30,10 @@ int menu(int room[], int ROOMS, int PRICE) {
 
 	int thing;
 	int goAgain;
+	int sum = 0;
+	int free;
 
-	cout << "\nWhat would you like to do?\n\n 1. Make reservation\n 0. Close program\n\n";
+	cout << "\nWhat would you like to do?\n\n 1. Make reservation\n 2. Print current room reservation status\n 0. Close program\n\n";
 	cin >> thing;
 
 	switch (thing) {
@@ -52,6 +54,49 @@ int menu(int room[], int ROOMS, int PRICE) {
 		return 0;
 		break;
 		
+	}
+	case 2: {
+
+		cout << "Current reservation status:\n\n";
+
+		for (int b = 0; b < ROOMS; b++) {
+
+			if (room[b] == 1) {
+
+				cout << "Room " << b + 1 << ". Reserved.\n";
+				sum++;
+			}
+			else {
+
+				cout << "Room " << b + 1 << ". Free.\n";
+
+			}
+
+		}
+		if (sum == ROOMS) {
+
+			cout << "All rooms are currently reserved.\n";
+
+		}
+		else {
+
+			free = ROOMS - sum;
+
+			cout << "There are currently " << free << " rooms available for reservation.\n\n";
+
+		}
+
+		cout << "Would you like to exit the program?\n\n 1. Continue operating.  |  0. Close program.\n";
+		cin >> goAgain;
+
+		if (goAgain == 1) {
+
+			menu(room, ROOMS, PRICE);
+
+		}
+		return 0;
+
+
 	}
 	case 0: {
 
@@ -122,7 +167,7 @@ int order(int room[], int ROOMS, int PRICE) {
 			cout << "Please input the wanted room number:\n\n";	//asking for wanted room number
 			cin >> roomNum;
 
-			if (cin.fail() || roomNum > 50 || roomNum < 1) {
+			if (cin.fail() || roomNum > ROOMS || roomNum < 1) {
 
 				error = true;
 				cout << "Error! Please input a valid number between 1-" << ROOMS << ".\n";
@@ -132,6 +177,8 @@ int order(int room[], int ROOMS, int PRICE) {
 			}
 			if (room[roomNum - 1] == 1) {	//this one to check whether the wanted room is occupied
 
+
+				error = true;
 				cout << "Sorry, this room already has a reservation.\nPlease input a new room number to continue.\n";
 				cin.clear();
 				cin.ignore(80, '\n');
@@ -149,12 +196,6 @@ int order(int room[], int ROOMS, int PRICE) {
 	}
 
 	room[roomNum - 1] = 1;
-
-	for (int a = 0; a < ROOMS; a++) {
-
-		cout << room[a] << endl;
-
-	}
 
 	//output cost of stay
 	cost = days * PRICE;
